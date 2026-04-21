@@ -1,0 +1,18 @@
+# test
+    CUDA_VISIBLE_DEVICES=0 python3 save_visual.py config/best.yaml
+        --ckpt_name checkpoint_13_iter8193.pth.tar --dataset LFW
+
+
+# train
+    CUDA_VISIBLE_DEVICES=0 python3 main_train.py config/main.yaml --data_root /mnt/03a7b3b6-14f4-4a74-958b-71dd6cdd09bc/dataset/CASIA-WebFace
+
+# random_encrypt
+
+    CUDA_VISIBLE_DEVICES=0 python3 random_encrypt.py config/best.yaml --ckpt_name checkpoint_13_iter8193.pth.tar --dataset CELEBA --data_root /mnt/03a7b3b6-14f4-4a74-958b-71dd6cdd09bc/outputs/paper/img_align_celeba_128 --save_dir /mnt/03a7b3b6-14f4-4a74-958b-71dd6cdd09bc/outputs/paper/img_align_celeba_128_encrypt_4_15
+
+# 超分celeba 匿名图片
+    python face_enhancement_v2.py --model GPEN-BFR-512 --channel_multiplier 2 --narrow 1 --use_sr --use_cuda --indir /mnt/03a7b3b6-14f4-4a74-958b-71dd6cdd09bc/outputs/paper/img_align_celeba_128 --outdir /mnt/03a7b3b6-14f4-4a74-958b-71dd6cdd09bc/outputs/paper_2/img_align_celeba_128
+
+
+# 加编码
+    python my_embed_fingerprints_v2.py --encoder_path model/gauss_2/stegastamp_100_16032022_21:49:43_encoder.pth --data_dir /mnt/03a7b3b6-14f4-4a74-958b-71dd6cdd09bc/outputs/paper/img_align_celeba_128_encrypt_super_2_3_12 --image_resolution 128 --output_dir /mnt/03a7b3b6-14f4-4a74-958b-71dd6cdd09bc/outputs/paper/img_align_celeba_256_encrypt_fingerprint_4_15 --batch_size 8
